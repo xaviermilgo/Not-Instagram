@@ -15,4 +15,8 @@ class Profile(models.Model):
 
 class Post(models.Model):
     image = models.ImageField()
-    user = models.ForeignKey(Profile)
+    user = models.ForeignKey(Profile)class Comments(models.Model):
+
+
+class Comments(models.Model):
+    text = models.TextField()

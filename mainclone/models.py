@@ -12,6 +12,10 @@ class Profile(models.Model):
             print("has no profile!")
             cls(user=user).save()
 
+    def follow(self,profile):
+        if self.following.filter(followee=profile).count() == 0:
+            Follows(followee=profile, follower=self).save()
+
     def comment(self,photo,text):
         Comments(text=text,photo=photo, user=self).save()
 

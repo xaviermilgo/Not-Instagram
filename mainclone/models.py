@@ -12,10 +12,13 @@ class Profile(models.Model):
             print("has no profile!")
             cls(user=user).save()
 
+    def comment(self,photo,text):
+        Comments(text=text,photo=photo, user=self).save()
+
 
 class Post(models.Model):
     image = models.ImageField()
-    user = models.ForeignKey(Profile)class Comments(models.Model):
+    user = models.ForeignKey(Profile, related_name='posts')
 
 
 class Comments(models.Model):
@@ -26,6 +29,9 @@ class Comments(models.Model):
 
 class Likes(models.Model):
     user = models.ForeignKey(Profile, related_name='likes')
-    photo = models.ForeignKey(Profile, related_name='likes')class Follows(models.Model):
+    photo = models.ForeignKey(Profile, related_name='likes')
+
+
+class Follows(models.Model):
     follower = models.ForeignKey(Profile, related_name='following')
     followee = models.ForeignKey(Profile, related_name='followers')

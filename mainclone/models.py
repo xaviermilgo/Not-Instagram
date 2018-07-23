@@ -16,6 +16,10 @@ class Profile(models.Model):
         if self.following.filter(followee=profile).count() == 0:
             Follows(followee=profile, follower=self).save()
 
+    def like(self,photo):
+        if self.likes.filter(photo=photo).count() == 0:
+            Likes(photo=photo,user=self).save()
+
     def comment(self,photo,text):
         Comments(text=text,photo=photo, user=self).save()
 

@@ -1,0 +1,9 @@
+Dear {{user.username}},
+
+Your Account has been created.
+Your activation url: http://{{site.domain}}{% url 'registration_activate' activation_key %}
+You have {{expiration_days}} days to activate your account using this code.
+
+
+You are receiving this email because you have signed up for anew account on our website {{site.name}}.
+This message comes from an unmonitored mailbox. Please do not reply to this message.

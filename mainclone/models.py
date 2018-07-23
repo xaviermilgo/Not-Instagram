@@ -26,4 +26,6 @@ class Comments(models.Model):
 
 class Likes(models.Model):
     user = models.ForeignKey(Profile, related_name='likes')
-    photo = models.ForeignKey(Profile, related_name='likes')
+    photo = models.ForeignKey(Profile, related_name='likes')class Follows(models.Model):
+    follower = models.ForeignKey(Profile, related_name='following')
+    followee = models.ForeignKey(Profile, related_name='followers')

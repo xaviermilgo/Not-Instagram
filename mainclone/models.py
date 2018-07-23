@@ -20,3 +20,10 @@ class Post(models.Model):
 
 class Comments(models.Model):
     text = models.TextField()
+    photo = models.ForeignKey(Post, related_name='comments')
+    user = models.ForeignKey(Profile, related_name='comments')
+
+
+class Likes(models.Model):
+    user = models.ForeignKey(Profile, related_name='likes')
+    photo = models.ForeignKey(Profile, related_name='likes')

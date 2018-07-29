@@ -56,3 +56,15 @@ togglefollow = (id)=>{
         }
     });
 };
+togglesave = (id)=>{
+    $.get('/save/'+id,()=>{
+        let anim=$("#saveicon"+id);
+        anim.toggleClass("saved");
+    });
+};
+function chelewa(){
+    userinput.toggleClass('loading');
+    return nowsleep(100).then(()=>{
+        userinput.toggleClass('loading');
+    })
+};

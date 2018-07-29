@@ -28,6 +28,18 @@ def mine(request):
     print(user_liked)
     return render(request, 'myprofile.html', locals())\@login_required(login_url='/accounts/login/')
 @login_required(login_url='/accounts/login/')
+def save(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    request.user.profile.save(post)
+    return JsonResponse({}, safe=False)
+
+
+@login_required(login_url='/accounts/login/')
+def unlike(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    request.user.profile.unlike(post)
+    return JsonResponse(post.count_likes, safe=False)
+@login_required(login_url='/accounts/login/')
 def find(request, name):
     results = Profile.find_profile(name)
     return render(request, 'searchresults.html', locals())

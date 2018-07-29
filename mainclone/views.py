@@ -26,4 +26,8 @@ def mine(request):
     user_saved = [save.photo for save in user_object.profile.saves.all()]
     user_liked = [like.photo for like in user_object.profile.mylikes.all()]
     print(user_liked)
-    return render(request, 'myprofile.html', locals())\
+    return render(request, 'myprofile.html', locals())\@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
+def find(request, name):
+    results = Profile.find_profile(name)
+    return render(request, 'searchresults.html', locals())

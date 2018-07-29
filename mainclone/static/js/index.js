@@ -3,7 +3,7 @@ sleep=(ms)=>{
 };
 async function nowsleep(x) {
   await sleep(x);
-}}
+}
 document.onscroll = ()=>
     {
         if (document.body.scrollTop > 100 ) {
@@ -14,3 +14,29 @@ document.onscroll = ()=>
             $("#brand").addClass("logo");
         }
     };
+choose= (id)=>{
+  if ($("#likeicon"+id).hasClass("loved")){
+      return unlike(id)
+  }
+  like(id)
+};
+like = (id)=>{
+    $.get('/like/'+id,(newlikes)=>{
+        anim=$("#likeheart"+id);
+        anim.show(300);
+        nowsleep(600).then(()=>{
+                anim.hide(50);
+                $("#likeicon"+id).addClass("loved")
+                $("#likespan"+id).text(newlikes)
+            }
+        )
+    });
+};
+unlike = (id)=>{
+    $.get('/unlike/'+id,(newlikes)=>{
+        nowsleep(600).then(()=>{
+                $("#likeicon"+id).removeClass("loved");
+                $("#likespan"+id).text(newlikes)
+            }
+        )
+    });

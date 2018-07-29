@@ -47,7 +47,14 @@ class Post(models.Model):
     def get_comments(self):
         return self.comments.all()
 
-class Comments(models.Model):
+    @property
+    def count_likes(self):
+        return self.photolikes.count()
+
+    class Meta:
+        ordering = ["-pk"]
+
+class Comment(models.Model):
     text = models.TextField()
     photo = models.ForeignKey(Post, related_name='comments')
     user = models.ForeignKey(Profile, related_name='comments')
@@ -56,6 +63,9 @@ class Comments(models.Model):
 class Likes(models.Model):
     user = models.ForeignKey(Profile, related_name='likes')
     photo = models.ForeignKey(Profile, related_name='likes')
+class Saves(models.Model):
+    user = models.ForeignKey(Profile, related_name='saves')
+    photo = models.ForeignKey(Post)
 
     class Meta:
         ordering = ["-pk"]

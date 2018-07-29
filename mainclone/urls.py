@@ -5,4 +5,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', views.home, name='landing'),
-    url(r'^myaccount/$', views.mine, name='myaccount'),    url(r'^search/(?P<name>.+)$', views.find, name='save'),
+    url(r'^myaccount/$', views.mine, name='myaccount'),
+    url(r'^myaccount/edit/$', views.edit, name='edit'),
+    url(r'^comment/(?P<post_id>\d+)$', views.comment_on, name='comment'),

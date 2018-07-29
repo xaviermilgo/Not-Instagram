@@ -27,6 +27,16 @@ def mine(request):
     user_liked = [like.photo for like in user_object.profile.mylikes.all()]
     print(user_liked)
     return render(request, 'myprofile.html', locals())\@login_required(login_url='/accounts/login/')
+
+@login_required(login_url='/accounts/login/')
+def user(request, user_id):
+    user_object=get_object_or_404(User, pk=user_id)
+    if request.user == user_object:
+        return redirect('myaccount')
+    isfollowing = user_object.profile not in request.user.profile.follows
+    user_images = user_object.profile.posts.all()
+    user_liked = [like.photo for like in user_object.profile.mylikes.all()]
+    return render(request, 'profile.html', locals())
 @login_required(login_url='/accounts/login/')
 def save(request, post_id):
     post = get_object_or_404(Post, pk=post_id)

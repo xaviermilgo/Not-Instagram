@@ -20,10 +20,8 @@ class Profile(models.Model):
         instance.profile.save()
 
     @classmethod
-    def usercheck(cls,user):
-        if cls.objects.filter(user=user).count() == 0:
-            print("has no profile!")
-            cls(user=user).save()
+    def find_profile(cls,name):
+        return cls.objects.filter(user__username__icontains = name).all()
 
     def follow(self,profile):
         if self.following.filter(followee=profile).count() == 0:

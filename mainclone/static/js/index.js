@@ -68,3 +68,24 @@ function chelewa(){
         userinput.toggleClass('loading');
     })
 };
+
+$(document).ready(()=> {
+    userinput = $("#searching");
+    $("#searchform").keyup(() => {
+        let key = userinput.val();
+        let place = $("#resultsplace");
+        let plc = $("#resultsbody");
+        if (key.length < 1) {
+            place.empty();
+            plc.hide();
+            return
+        }
+        chelewa().then(()=>{
+            $.get('/search/' + key, '', function (data) {
+                plc.show();
+                place.empty();
+                place.append(data);
+            })
+        })
+    })
+});

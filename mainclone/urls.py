@@ -8,3 +8,7 @@ urlpatterns = [
     url(r'^myaccount/$', views.mine, name='myaccount'),
     url(r'^myaccount/edit/$', views.edit, name='edit'),
     url(r'^comment/(?P<post_id>\d+)$', views.comment_on, name='comment'),
+    url(r'^user/(?P<user_id>\d+)$', views.user, name='aboutuser'),
+    url(r'^like/(?P<post_id>\d+)$', views.like, name='like'),
+    url(r'^save/(?P<post_id>\d+)$', views.save, name='save'),
+    url(r'^search/(?P<name>.+)$', views.find, name='save'),

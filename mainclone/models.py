@@ -35,8 +35,12 @@ class Profile(models.Model):
         if self.mylikes.filter(photo=photo).count() == 0:
             Likes(photo=photo,user=self).save()
 
-    def comment(self,photo,text):
-        Comments(text=text,photo=photo, user=self).save()
+    def save(self, photo):
+        if self.saves.filter(photo=photo).count() == 0:
+            Saves(photo=photo,user=self).save()
+        else:
+            self.saves.filter(photo=photo).delete()
+
 
 
 class Post(models.Model):

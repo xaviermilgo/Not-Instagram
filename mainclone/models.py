@@ -26,6 +26,10 @@ class Profile(models.Model):
     def follow(self,profile):
         if self.following.filter(followee=profile).count() == 0:
             Follows(followee=profile, follower=self).save()
+            return True
+        else:
+            self.following.filter(followee=profile).delete()
+            return False
 
     def like(self,photo):
         if self.likes.filter(photo=photo).count() == 0:

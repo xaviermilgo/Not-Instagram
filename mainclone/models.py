@@ -57,6 +57,8 @@ class Likes(models.Model):
     user = models.ForeignKey(Profile, related_name='likes')
     photo = models.ForeignKey(Profile, related_name='likes')
 
+    class Meta:
+        ordering = ["-pk"]
 
 class Follows(models.Model):
     follower = models.ForeignKey(Profile, related_name='following')

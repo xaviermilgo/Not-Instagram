@@ -28,3 +28,23 @@ body{
     height: 51px;
     width: 175px;
 }
+small{
+    display: none!important;
+}
+label{
+    display: none!important;
+}
+.invite{
+    line-height: 20px;
+    font-size: 17px;
+    margin: 0 40px 10px;
+    color: #999;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    padding: 0;
+    border: 0;
+    margin-top: 0;
+}
+.alert{
+    display: none;
+}

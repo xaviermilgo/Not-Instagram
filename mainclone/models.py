@@ -23,7 +23,7 @@ class Profile(models.Model):
     def find_profile(cls,name):
         return cls.objects.filter(user__username__icontains = name).all()
 
-    def follow(self,profile):
+    def togglefollow(self, profile):
         if self.following.filter(followee=profile).count() == 0:
             Follows(followee=profile, follower=self).save()
             return True
@@ -41,10 +41,20 @@ class Profile(models.Model):
         else:
             self.saves.filter(photo=photo).delete()
 
+    def unlike(self, photo):
+        self.mylikes.filter(photo=photo).all().delete()
+
+    def comment(self, photo, text):
+        Comment(text=text, photo=photo, user=self).save()
+
+    def post(self, form):
+        image = form.save(commit=False)
+        image.user = self
+        image.save()
 
 
 class Post(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='posts/')
     user = models.ForeignKey(Profile, related_name='posts')
 
     @property
@@ -65,8 +75,9 @@ class Comment(models.Model):
 
 
 class Likes(models.Model):
-    user = models.ForeignKey(Profile, related_name='likes')
-    photo = models.ForeignKey(Profile, related_name='likes')
+    user = models.ForeignKey(Profile, related_name='mylikes')
+    photo = models.ForeignKey(Post, related_name='photolikes')
+
 class Saves(models.Model):
     user = models.ForeignKey(Profile, related_name='saves')
     photo = models.ForeignKey(Post)

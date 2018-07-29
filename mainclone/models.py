@@ -52,6 +52,9 @@ class Profile(models.Model):
         image.user = self
         image.save()
 
+    @property
+    def follows(self):
+        return [follow.followee for follow in self.following.all()]
 
 class Post(models.Model):
     image = models.ImageField(upload_to='posts/')

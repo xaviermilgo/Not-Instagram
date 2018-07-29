@@ -31,8 +31,8 @@ class Profile(models.Model):
             self.following.filter(followee=profile).delete()
             return False
 
-    def like(self,photo):
-        if self.likes.filter(photo=photo).count() == 0:
+    def like(self, photo):
+        if self.mylikes.filter(photo=photo).count() == 0:
             Likes(photo=photo,user=self).save()
 
     def comment(self,photo,text):
@@ -43,6 +43,9 @@ class Post(models.Model):
     image = models.ImageField()
     user = models.ForeignKey(Profile, related_name='posts')
 
+    @property
+    def get_comments(self):
+        return self.comments.all()
 
 class Comments(models.Model):
     text = models.TextField()

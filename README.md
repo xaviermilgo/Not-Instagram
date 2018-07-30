@@ -1,6 +1,6 @@
 # INSTAGRAM CLONE
 > Moringa school IP
-[Live Link]()
+[Live Link](https://not-instagram.herokuapp.com/)
 ## Description
 This is a clone of the image sharing network, Instagram. 
 Users can sign up login, view and post photos and follow other users.

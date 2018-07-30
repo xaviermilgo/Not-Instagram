@@ -35,7 +35,7 @@ class Profile(models.Model):
         if self.mylikes.filter(photo=photo).count() == 0:
             Likes(photo=photo,user=self).save()
 
-    def save(self, photo):
+    def save_image(self, photo):
         if self.saves.filter(photo=photo).count() == 0:
             Saves(photo=photo,user=self).save()
         else:

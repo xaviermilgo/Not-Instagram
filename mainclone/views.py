@@ -82,7 +82,7 @@ def like(request, post_id):
 @login_required(login_url='/accounts/login/')
 def save(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    request.user.profile.save(post)
+    request.user.profile.save_image(post)
     return JsonResponse({}, safe=False)
 
 
